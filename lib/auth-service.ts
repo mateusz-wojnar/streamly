@@ -1,8 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server";
 
 import { db } from "@/lib/db";
-import { Simulate } from "react-dom/test-utils";
-import error = Simulate.error;
 
 export const getSelf = async () => {
   const self = await currentUser();
