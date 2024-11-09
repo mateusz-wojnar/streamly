@@ -10,6 +10,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { Toaster } from "sonner";
 
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -45,6 +46,7 @@ export default function RootLayout({
             forcedTheme="dark"
             storageKey="streamly-key"
           >
+            <Toaster theme="light" position="bottom-center" />
             {children}
           </ThemeProvider>
         </body>
