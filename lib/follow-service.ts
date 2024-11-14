@@ -17,7 +17,11 @@ export const getFollowedUsers = async () => {
         },
       },
       include: {
-        following: true,
+        following: {
+          include: {
+            stream: true,
+          },
+        },
       },
     });
 
@@ -56,7 +60,7 @@ export const isFollowingUser = async (id: string) => {
   }
 };
 
-export const followeUser = async (id: string) => {
+export const followUser = async (id: string) => {
   const self = await getSelf();
 
   const otherUser = await db.user.findUnique({
