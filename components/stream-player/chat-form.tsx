@@ -37,7 +37,7 @@ export const ChatForm = ({
     e.preventDefault();
     e.stopPropagation();
 
-    if (!value || isDisabled) return
+    if (!value || isDisabled) return;
 
     if (isDelayed && !isDelayBlocked) {
       setIsDelayBlocked(true);
@@ -45,7 +45,7 @@ export const ChatForm = ({
         setIsDelayBlocked(false);
         onSubmit();
         console.log("delayconsole");
-      }, 3);
+      }, 3000);
     } else {
       onSubmit();
       console.log("console2");
@@ -70,7 +70,7 @@ export const ChatForm = ({
           placeholder="Send a message"
           className={cn(
             "border-white/10",
-            isFollowersOnly && "rounded-t-none border-t-0"
+            (isFollowersOnly || isDelayed) && "rounded-t-none border-t-0"
           )}
         />
       </div>
