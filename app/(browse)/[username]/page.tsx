@@ -5,13 +5,11 @@ import { getUserByUsername } from "@/lib/user-service";
 import { StreamPlayer } from "@/components/stream-player";
 
 interface UserPageProps {
-  params: {
-    username: string;
-  };
+  params: Promise<{ username: string }>;
 }
 
 const UserPage = async ({ params }: UserPageProps) => {
-  const user = await getUserByUsername(params.username);
+  const user = await getUserByUsername((await params).username);
 
   if (!user || !user.stream) {
     notFound();
