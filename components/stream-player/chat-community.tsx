@@ -21,7 +21,7 @@ export const ChatCommunity = ({
   isHidden,
 }: ChatCommunityProps) => {
   const [value, setValue] = useState("");
-  const [debouncedValue, setDebouncedValue] = useDebounceValue<string>(value, 500);
+  const [debouncedValue] = useDebounceValue<string>(value, 500);
 
   const participants = useParticipants();
 
@@ -30,18 +30,23 @@ export const ChatCommunity = ({
   };
 
   const filteredParticipants = useMemo(() => {
-    const deduped = participants.reduce((acc, participant) => {
-      const hostAsViewer = `host-${participant.identity}`
-      if (!acc.some((p) => p.identity === hostAsViewer)) {
-        acc.push(participant)
-      }
-      return acc
-    }, [] as (RemoteParticipant | LocalParticipant)[])
+    const deduped = participants.reduce(
+      (acc, participant) => {
+        const hostAsViewer = `host-${participant.identity}`;
+        if (!acc.some((p) => p.identity === hostAsViewer)) {
+          acc.push(participant);
+        }
+        return acc;
+      },
+      [] as (RemoteParticipant | LocalParticipant)[]
+    );
 
     return deduped.filter((participant) => {
-      return participant.name?.toLowerCase().includes(debouncedValue.toLowerCase())
-    })
-  }, [participants, debouncedValue])
+      return participant.name
+        ?.toLowerCase()
+        .includes(debouncedValue.toLowerCase());
+    });
+  }, [participants, debouncedValue]);
 
   if (isHidden) {
     return (

@@ -38,7 +38,7 @@ export const UserAvatar = ({
       <Avatar
         className={cn(
           isLive && "ring-2 ring-rose-600 border border-background",
-          avatarSizes({ size }),
+          avatarSizes({ size })
         )}
       >
         <AvatarImage src={imageUrl} className="object-cover" />
@@ -56,7 +56,7 @@ export const UserAvatar = ({
   );
 };
 
-interface UserAvatarSkeletonProps extends VariantProps<typeof avatarSizes> {}
+type UserAvatarSkeletonProps = VariantProps<typeof avatarSizes>;
 
 export const UserAvatarSkeleton = ({ size }: UserAvatarSkeletonProps) => {
   return <Skeleton className={cn("rounded-full", avatarSizes({ size }))} />;
